@@ -1,0 +1,28 @@
+.margin{ 
+    margin-bottom: 2%;  
+}
+.pedd{
+    margin-left: 10px ;
+    margin-bottom: 2% ;
+    height: 25px;
+}
+.i-1{
+    width: 25%; 
+}
+.i-2{
+    width: 10%; 
+}
+.i-3{
+    width: 15%; 
+}
+.i-4{
+    width: 20%; 
+}
+.i-5{
+    width: 18%; 
+    height: 25px; 
+} 
+.btnAdd{
+    background-color: navy;
+    color: white;
+}

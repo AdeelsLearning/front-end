@@ -1,0 +1,27 @@
+<div class="logincontainer" style="background-repeat: no-repeat; 
+background-image:url('/assets/login11w.jpg');  
+ background-size:  cover;">
+  <div class="card">
+    <img id="profile-img" class="profile-img-card" src="/assets/logo.jpg" />
+    <p id="profile-name" class="profile-name-card">Community Services</p>
+
+      <form class="form-signin" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <div class="alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</div> 
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }"> 
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Your User ID"
+               pattern="[^ @]*@[^ @]*" [(ngModel)]="user.username" #username="ngModel" required />
+        <div *ngIf="f.submitted && !username.valid" class="help-block">Valid username is required</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }"> 
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password"
+               [(ngModel)]="user.password" #password="ngModel" required />
+        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+      </div>
+      <div id="remember" class="checkbox">
+
+      </div> 
+      <button class="btn-signin" type="submit">Sign in</button>
+    </form><!-- /form -->
+      <a [routerLink]="['/register']" class="btn-link">Create new Account!</a>
+  </div><!-- /card-container -->
+</div><!-- /container --> 

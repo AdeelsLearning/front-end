@@ -1,0 +1,57 @@
+ <div  class="page-toolbar">
+    <a [routerLink]="['/home']" class="btn-link"> Home</a> /  Months List 
+</div>
+
+<div class="page-filter"> 
+  <mat-form-field class="input-filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter"> 
+  </mat-form-field>  
+</div>
+<div class="page-container">
+    <mat-toolbar class="page-header">
+        <i id="addIcon" class="material-icons page-header-icon" (click)="addClick()" title="add new record">add_circle</i>
+        <i id="addIcon" class="material-icons page-header-icon" (click)="exportAsXLSX()" title="export Excel">print</i>
+    </mat-toolbar>
+   
+  <mat-table [dataSource]="dataSource" matSort  >
+  <!-- Action Column -->
+    <ng-container matColumnDef="actions" class="action-cell">
+      <mat-header-cell *matHeaderCellDef class="tableHeader"> Actions </mat-header-cell>
+      <mat-cell  *matCellDef="let row" >  
+          <i class="material-icons" (click)="deleteClick(row.monthId,row.monthDesc)" title="Delete">delete</i> 
+          <i class="material-icons" (click)="editClick(row)" title="edit">edit</i>  
+      </mat-cell> 
+    </ng-container>
+ 
+    <!-- ID Column --> 
+    <ng-container matColumnDef="monthId">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader" > Month ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.monthId}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="monthCode">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Month Code </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.monthCode}}</mat-cell>
+    </ng-container>
+ 
+    <!-- Name Column -->
+    <ng-container matColumnDef="monthDesc">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Month Desc </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.monthDesc}} </mat-cell>
+    </ng-container> 
+ 
+     <!-- Name Column -->
+     <ng-container matColumnDef="monthActive">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Active </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.monthActive == true ? 'Yes' : 'No'}}</mat-cell>
+    </ng-container> 
+
+    <mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></mat-header-row>
+    <mat-row id="tblrow" *matRowDef="let row; columns: displayedColumns;"
+             [ngClass]="{'highlight': selectedRowIndex == row.monthId}"
+             (click)="rowClick(row)" (dblclick)="editClick(row)">
+    </mat-row>
+  </mat-table> 
+  <mat-paginator [pageSizeOptions]="[50, 100, 200,500,1000]" class="paginator"></mat-paginator>
+</div> 

@@ -1,0 +1,15 @@
+<div class="containers"> 
+    <div class="header" style="text-align: left">  Select Diseases You Have!    </div>   
+    <mat-selection-list id="dsList" #list [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
+        <mat-list-option *ngFor="let disease of diseasesList" [value]="disease">
+          {{disease}}
+        </mat-list-option>
+    </mat-selection-list>
+    <div *ngIf=show style="background-color: lightskyblue">
+      Selected: {{ selectedOptions | json }}
+       SelectedLength: {{ list.selectedOptions.selected.length}}  
+    </div>
+  </div>
+  <div class="margin" style="text-align: right">
+    <button  class="btnAdd" mat-button  (click)="addDisease()">Save & Exit</button>
+  </div>

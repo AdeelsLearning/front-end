@@ -1,0 +1,42 @@
+
+<div class="PageContainer"> 
+    <div  class="page-toolbar">
+            <a [routerLink]="['/home']" class="btn-link"> Home</a> /   <a [routerLink]="['/auth/setups/months']" class="btn-link"> Months List</a> / Add New Month 
+    </div> 
+   <div class="FormContainer"> 
+
+      <form class="addForm" name="form" (ngSubmit)="f.form.valid && saveClick()" #f="ngForm" novalidate>
+        <div class="alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+
+        <div class="formRow" [ngClass]="{ 'has-error': f.submitted && !monthCode.valid }"> 
+            <mat-form-field class="input_field">
+                <input matInput  name="monthCode" id="monthCode" [(ngModel)]="month.monthCode" #monthCode="ngModel" required
+                       placeholder="Month Code">  
+            </mat-form-field>  
+            <div *ngIf="f.submitted && !monthCode.valid" class="help-block">The month code is required</div>
+        </div>
+
+        <div class="formRow" [ngClass]="{ 'has-error': f.submitted && !monthDesc.valid }"> 
+            <mat-form-field class="input_field">
+                <input matInput  name="monthDesc" id="monthDesc" [(ngModel)]="month.monthDesc" #monthDesc="ngModel" required
+                       placeholder="Month Desc">  
+            </mat-form-field>  
+            <div *ngIf="f.submitted && !monthDesc.valid" class="help-block">The month Desc is required</div> 
+        </div>   
+  
+        <div class="formRow">  
+                <mat-checkbox id="monthActive" #monthActive="ngModel" [(ngModel)]="month.monthActive" 
+                              name="monthActive" [checked]="month.monthActive">Active</mat-checkbox>
+        </div>  
+
+        <div class="formRow">
+            <button class="btn-save" type="submit">Save</button>  
+            <button class="btn-save" (click)="cancel()">Cancel</button>
+        </div>   
+      </form><!-- /form -->
+
+   </div><!-- /card-container -->
+</div><!-- /container -->
+    
+    
+    

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="card"> 
+      <img id="profile-img" class="profile-img-card" src="/assets/logo.jpg" />
+      <p id="profile-name" class="profile-name-card">Community Services</p>
+
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+      <div class="alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</div> 
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !fullName.valid }"> 
+        <input type="text" class="form-control" name="fullName" id="fullName" [(ngModel)]="user.fullName" #fullName="ngModel" required
+               placeholder="Your full name" />
+        <div *ngIf="f.submitted && !fullName.valid" class="help-block">The full Name is required</div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }"> 
+        <input type="text" class="form-control" name="username" id="username" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.username" #username="ngModel" required 
+               placeholder="Your email address" />
+        <div *ngIf="f.submitted && !username.valid" class="help-block">
+
+          <div *ngIf="username.errors.required">
+            Email is required.
+          </div> 
+          <div *ngIf="username.errors.pattern">
+            A valid email address is required
+          </div>  
+
+        </div>
+      </div>
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">  
+        <input type="password" class="form-control" name="password" id="password"[(ngModel)]="user.password" #password="ngModel" required minlength="4" 
+                 placeholder="Password" />
+        <div *ngIf="f.submitted && !password.valid" class="help-block">
+
+          <div *ngIf="password.errors.required">
+            password is required.
+          </div>
+          <div *ngIf="password.errors.minlength">
+            password must be at least 4 characters long.
+          </div>
+
+        </div>
+      </div>  
+      <button class="btn-reg" type="submit">Create Account</button>
+      
+    </form><!-- /form -->
+    <a [routerLink]="['/login']" class="btn-link">Sign in instead</a>
+  </div><!-- /card-container -->
+</div><!-- /container -->
+
+
+
+
+

@@ -1,0 +1,59 @@
+
+<div class="PageContainer">
+    <div  class="page-toolbar">
+        <a [routerLink]="['/home']" class="btn-link"> Home</a> / <a [routerLink]="['/auth/user']" class="btn-link"> User List</a> / Add New User 
+    </div> 
+   <div class="FormContainer"> 
+
+      <form class="addForm" name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+        <div class="alert" role="alert" *ngIf="errorMessage">{{errorMessage}}</div> 
+        <div class="formRow" [ngClass]="{ 'has-error': f.submitted && !fullName.valid }"> 
+            <mat-form-field class="input_field">
+                <input matInput  name="fullName" id="fullName" [(ngModel)]="user.fullName" #fullName="ngModel" required
+                       placeholder="Full Name">  
+            </mat-form-field>  
+            <div *ngIf="f.submitted && !fullName.valid" class="help-block">The User Name is required</div>
+        </div>
+        <div class="formRow" [ngClass]="{ 'has-error': f.submitted && !username.valid }"> 
+            <mat-form-field class="input_field" > 
+                <input matInput  name="username" id="username" pattern="[^ @]*@[^ @]*" [(ngModel)]="user.username" #username="ngModel" required 
+                       placeholder="Email">  
+            </mat-form-field> 
+            <div *ngIf="f.submitted && !username.valid" class="help-block">
+
+                <div *ngIf="username.errors.required">
+                  Email is required.
+                </div> 
+                <div *ngIf="username.errors.pattern">
+                  A valid email address is required
+                </div>  
+      
+              </div>   
+        </div>
+        <div class="formRow"  [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+              <mat-form-field class="input_field"> 
+                  <input matInput type="password" class="form-control" name="password" id="password"[(ngModel)]="user.password" #password="ngModel" required minlength="4"
+                         placeholder="Password"> 
+              </mat-form-field>  
+              <div *ngIf="f.submitted && !password.valid" class="help-block">
+
+                  <div *ngIf="password.errors.required">
+                    password is required.
+                  </div>
+                  <div *ngIf="password.errors.minlength">
+                    password must be at least 4 characters long.
+                  </div>
+        
+                </div>
+        </div>
+        <div class="formRow">
+            <button class="btn-save" type="submit">Save</button>
+            <button class="btn-save" (click)="cancel()">Cancel</button>
+        </div> 
+      </form><!-- /form -->
+
+   </div><!-- /card-container -->
+</div><!-- /container -->
+    
+    
+    

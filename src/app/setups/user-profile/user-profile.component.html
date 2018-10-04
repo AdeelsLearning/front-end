@@ -1,0 +1,104 @@
+<div class="PageContainer">
+    <div  class="page-toolbar">
+            <a [routerLink]="['/home']" class="btn-link"> Home</a> / Registration 
+    </div> 
+<div class="FormContainer"> 
+  <mat-horizontal-stepper [linear]="isLinear" #stepper class="stepper">
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" class="addForm"  name="form" (ngSubmit)="f.form.valid && saveClick()" #f="ngForm" >
+        <ng-template matStepLabel>Personal Details</ng-template>
+        <div class="FormContenets">
+        <mat-form-field class="input-field if-2"> 
+          <input matInput placeholder="First name" formControlName="fregName" required
+                  name="regName" id="regName"  [(ngModel)]="regDetail.regName">
+        </mat-form-field>
+         <mat-form-field class="input-field if-2">
+          <input matInput placeholder="Last name" formControlName="fregSuffix" required
+                  name="regSuffix" id="regSuffix" [(ngModel)]="regDetail.regSuffix">
+        </mat-form-field >  
+        <mat-form-field class="input-field if-2"> 
+            <mat-select matInput placeholder="Select Gender" formControlName="fregGender" required
+                        [ngModel]="regGender" (ngModelChange)="onChange($event)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let gender of genders" [value]="gender" >
+                {{gender.value}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="genderControl.hasError('required')">Please choose gender</mat-error> 
+          </mat-form-field> 
+        <mat-form-field class="input-field if-2">
+            <input matInput placeholder="Age" formControlName="fregAge" required
+                    name="regAge" id="regAge" [(ngModel)]="regDetail.regAge" >
+          </mat-form-field>  
+        <mat-form-field class="input-field if-2">
+          <input matInput placeholder="Email (Optional)" formControlName="fregContactOther"
+                 name="regContactOther" id="regContactOther" [(ngModel)]="regDetail.regContactOther"  >
+        </mat-form-field>
+     <mat-form-field class="input-field if-2">
+          <input matInput placeholder="Contact No" formControlName="fregContactMob" required
+                  name="regContactMob" id="regContactMob" [(ngModel)]="regDetail.regContactMob" >
+        </mat-form-field >   
+        <mat-form-field class="input-field if-1">
+          <input matInput placeholder="Address" formControlName="fregAddress" required
+                 name="regAddress" id="regAddress" [(ngModel)]="regDetail.regAddress">
+        </mat-form-field>
+       <div class="formRow"> 
+        <mat-checkbox  id="regIllness" class="input-field if-1"  #regIllness="ngModel"
+                       [(ngModel)]="regDetail.regIllness" name="regIllness">Health Issues?
+         </mat-checkbox>  
+          
+        </div> 
+        <div class="formRow">  
+        <label>  Describe shortly if Yes</label><br> 
+             <mat-form-field class="input-field if-1"> 
+             <input matInput placeholder="Description" formControlName="fregIllnessDetail" 
+                    name="regIllnessDetail" id="regIllnessDetail" [(ngModel)]="regDetail.regIllnessDetail"  >
+         </mat-form-field>
+        </div>  
+        
+         <mat-form-field class="input-field if-1">
+            <input matInput placeholder="Doctor already consultanting" formControlName="fregConsultantName"
+                   name="regConsultantName" id="regConsultantName" [(ngModel)]="regDetail.regConsultantName" >
+        </mat-form-field>
+ 
+          <mat-form-field class="input-field if-2"> 
+            <input matInput [matDatepicker]="picker" placeholder="Last Vsit" formControlName="fregLastVisited"
+                    name="regLastVisited" id="regLastVisited" [(ngModel)]="regDetail.regLastVisited" >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> 
+ 
+          <mat-form-field class="input-field if-2"> 
+            <input matInput [matDatepicker]="picker2" placeholder="Due Visit"  formControlName="fregDueVisit"
+                   name="regDueVisit" id="regDueVisit" [(ngModel)]="regDetail.regDueVisit" >
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field> 
+
+      </div> 
+        <div class="nextbar">
+          <button mat-button matStepperNext type="submit">Save & Next</button>
+        </div>
+      </form>
+    </mat-step>
+     <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup"  class="userFamilyForm"  name="form" >
+        <ng-template matStepLabel>Family Details</ng-template>
+        <app-family-detail [regIdChild] ="regIdParent"> </app-family-detail>
+        <div class="nextBackbar">
+          <button mat-button matStepperPrevious>Back</button> 
+          <button mat-button matStepperNext>Save & Next</button>
+        </div> 
+      </form>
+    </mat-step>   
+
+    <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup" class="regDiseasesForm"  name="form" >
+        <ng-template matStepLabel>Disease</ng-template>
+        <app-reg-diseases [regIdChild] ="regIdParent"></app-reg-diseases>  
+      </form>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</div>
+</div> 

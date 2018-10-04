@@ -1,0 +1,54 @@
+
+<div class="containers"> 
+     <div class="header" style="text-align: left">
+    {{regIdParent}}
+          <input class="i-1 pedd" id="name" mat-input placeholder="Name"  [(ngModel)]="details.fmlyName" >  
+          <input class="i-2 pedd" id="Age" mat-input  placeholder="Age" [(ngModel)]="details.fmlyAge">  
+          <input class="i-3 pedd" id="Relation" mat-input  placeholder="Relation"  [(ngModel)]="details.fmlyRelation">  
+          <input class="i-4 pedd" id="Healthy"  mat-input  placeholder="Healthy"  [(ngModel)]="details.fmlyHealthy" >   
+          <input class="i-5 pedd" id="Disease"  mat-input  placeholder="Disease"   [(ngModel)]="details.fmlyDisease">   
+      </div>  
+    <div class="margin" style="text-align: right">
+      <button  class="btnAdd" mat-button  (click)="addElement()">Add</button>
+    </div> 
+    
+  <mat-table [dataSource]="dataSource" matSort > 
+    <ng-container matColumnDef="actions" class="action-cell">
+      <mat-header-cell *matHeaderCellDef class="tableHeader"> Actions </mat-header-cell>
+      <mat-cell  *matCellDef="let row" >  
+          <i class="material-icons" (click)="deleteClick(row.fmlyId,row.fmlyName)" title="Delete">delete</i>  
+      </mat-cell> 
+    </ng-container>
+   
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader" > Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.fmlyName}} </mat-cell>
+    </ng-container>
+ 
+    <ng-container matColumnDef="Age">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Age </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.fmlyAge}}</mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="Relation">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Relation </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.fmlyRelation}} </mat-cell>
+    </ng-container> 
+     
+     <ng-container matColumnDef="Healthy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"> Healthy </mat-header-cell>
+      <mat-cell *matCellDef="let row">  {{row.fmlyHealthy}} </mat-cell>
+    </ng-container> 
+ 
+ <ng-container matColumnDef="Disease">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader">  Disease  </mat-header-cell>
+    <mat-cell *matCellDef="let row">  {{row.fmlyDisease}} </mat-cell>
+  </ng-container> 
+
+    <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+    <mat-row id="tblrow" *matRowDef="let row; columns: displayedColumns;"
+             [ngClass]="{'highlight': selectedRowIndex == row.fmlyId}"
+             (click)="rowClick(row)">
+    </mat-row>
+  </mat-table>    
+</div> 
